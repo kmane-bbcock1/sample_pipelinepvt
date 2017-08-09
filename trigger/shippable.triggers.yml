@@ -14,7 +14,7 @@ triggers:
      version:
        counter: 0
        
-  - name: spvt-tg4
+   - name: spvt-tg4
      type: trigger
      version:
        counter: 0
@@ -44,12 +44,12 @@ triggers:
      version:
        counter: 0
   
-  - name: spvt-tg9
+   - name: spvt-tg9
      type: trigger
      version:
        counter: 0
    
-  - name: spvt-tg10
+   - name: spvt-tg10
      type: trigger
      version:
        counter: 0
