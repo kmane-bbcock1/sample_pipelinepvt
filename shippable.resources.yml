@@ -198,61 +198,61 @@ resources:
         Google: "https://google.com"
         SHIPPABLE: "https://www.shippable.com"
   
-  - name: params1
+  - name: param1
     type: params
     version:
       params:
         versionyml: param1-v1
         
-  - name: params2
+  - name: param2
     type: params
     version:
       params:
         versionyml: param2-v1
         
-  - name: params3
+  - name: param3
     type: params
     version:
       params:
         versionyml: param3-v1
         
-  - name: params4
+  - name: param4
     type: params
     version:
       params:
         versionyml: param4-v1
   
-  - name: params5
+  - name: param5
     type: params
     version:
       params:
         versionyml: param5-v1
         
-  - name: params6
+  - name: param6
     type: params
     version:
       params:
         versionyml: param6-v1
   
-  - name: params7
+  - name: param7
     type: params
     version:
       params:
         versionyml: param7-v1
         
-  - name: params8
+  - name: param8
     type: params
     version:
       params:
         versionyml: param8-v1
         
-  - name: params9
+  - name: param9
     type: params
     version:
       params:
         versionyml: param9-v1
         
-  - name: params10
+  - name: param10
     type: params
     version:
       params:
@@ -278,4 +278,5 @@ resources:
     type: version
     seed:
       versionName: "5.8.2"
+      
       
