@@ -14,31 +14,35 @@ jobs:
     type: runCI
     steps:
       - IN: runci-nod_ciRepo
+      - IN: runSh-5
+      - IN: runSh-6
+      - IN: spvt-tg13
   
   - name: runci-jav_runCI
     type: runCI
     steps:
       - IN: runci-jav_ciRepo
+      - IN: spvt-tg17
   
-  - name: runci-go_runCI
-    type: runCI
-    steps:
-      - IN: runci-go_ciRepo
+  #- name: runci-go_runCI
+   # type: runCI
+  #  steps:
+    #  - IN: runci-go_ciRepo
   
-  - name: runci-php_runCI
-    type: runCI
-    steps:
-      - IN: runci-php_ciRepo
+ # - name: runci-php_runCI
+   # type: runCI
+   # steps:
+   #   - IN: runci-php_ciRepo
   
-  - name: runci-php_runCI
-    type: runCI
-    steps:
-      - IN: runci-php_ciRepo
+ # - name: runci-php_runCI
+ #   type: runCI
+ #   steps:
+ #     - IN: runci-php_ciRepo
   
-  - name: runci-clo_runCI
-    type: runCI
-    steps:
-      - IN: runci-clo_ciRepo
+ # - name: runci-clo_runCI
+ #   type: runCI
+ #   steps:
+  #    - IN: runci-clo_ciRepo
       
   - name: release1
     type: release
@@ -139,7 +143,23 @@ jobs:
       - TASK:
         - script: ./IN/scriptpvt_test/gitRepo/echo.sh
         - script: echo "versionyml=$versionyml"
-           
+   
+  - name: runSh-5
+    type: runSh
+    steps:
+      - IN: scriptpvt_test1      
+      - TASK:
+        - script: ls     
+        - script: ./IN/scriptpvt_test1/gitRepo/echo.sh
+        
+  - name: runSh-6
+    type: runSh
+    steps:
+      - IN: scriptpub_test1      
+      - TASK:
+        - script: ls     
+        - script: ./IN/scriptpub_test1/gitRepo/echo.sh
+        
 #RUNSH      
   - name: runCLI-1
     type: runCLI
@@ -181,7 +201,32 @@ jobs:
     steps:
       - IN: scriptpub_test
       - IN: runCLI-3
-      - IN: spvt-tg13
+      - IN: spvt-tg14
       - TASK:
         - script: ./IN/scriptpub_test/gitRepo/echo.sh
         - script: echo "versionyml=$versionyml"  
+  
+  - name: runCLI-5
+    type: runCLI
+    steps:
+      - IN: scriptpub_cli2
+      - IN: params7
+      - IN: spvt-tg15
+      - TASK:
+        - script: ls
+        - script: ./IN/scriptpub_cli2/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"
+  
+  - name: runCLI-6
+    type: runCLI
+    steps:
+      - IN: scriptpvt_cli2
+      - IN: params-8
+      - IN: runci-jav_runCI
+      - IN: runCLI-5
+      - IN: spvt-tg16
+      - TASK:
+        - script: ls
+        - script: ./IN/scriptpvt_cli2/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"
+        
