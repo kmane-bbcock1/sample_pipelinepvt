@@ -117,6 +117,22 @@ resources:
       sourceName: "shippabledocker/pipelinev2"
     seed:
       versionName: "deploy.3"
+  
+  - name: image4
+    type: image
+    integration: docker
+    pointer:
+      sourceName: "shippabledocker/sample_node"
+    seed:
+      versionName: "latest"
+       
+  - name: image5
+    type: image
+    integration: docker
+    pointer:
+      sourceName: "shippabledocker/sample_node"
+    seed:
+      versionName: "latest"
       
 #INTEGRATION
 
@@ -167,6 +183,66 @@ resources:
         secure: N5FV6T13u7oi+hEWBxy+Ns/oLNFTC/V9nJwSNiBuVGCQa4XQ8I0RjF+j8EJTFP7xfwU/PS49wtveQ1BD+asiy6HDku4/TlharVQRH4pAevTUMcx4YSgpMxHaBbBQeg58XovmgsQWts1tUFIrJBiHyJmeEHmP0uygxtXyPCYdph0VsUllAVu2m77FFF3WgukUriyHGstpRMbmBUVNSJ4oFbveAtAQ786+wtTT823Yvy3tCotl6/lvgzKFKkR3bBWvt0MAgYguJuDnpZJXtLuVeHt31gqPl6n+/ATeMbN0r7xC+4ysLMTvUhpxwXLPOGUtHk4CXR12VU+q/rKVFoG3iQ==
         Google: "https://google.com"
         SHIPPABLE: "https://www.shippable.com"
+  
+  - name: params1
+    type: params
+    version:
+      params:
+        versionyml: param1-v1
+        
+  - name: params2
+    type: params
+    version:
+      params:
+        versionyml: param2-v1
+        
+  - name: params3
+    type: params
+    version:
+      params:
+        versionyml: param3-v1
+        
+  - name: params4
+    type: params
+    version:
+      params:
+        versionyml: param4-v1
+  
+  - name: params5
+    type: params
+    version:
+      params:
+        versionyml: param5-v1
+        
+  - name: params6
+    type: params
+    version:
+      params:
+        versionyml: param6-v1
+  
+  - name: params7
+    type: params
+    version:
+      params:
+        versionyml: param7-v1
+        
+  - name: params8
+    type: params
+    version:
+      params:
+        versionyml: param8-v1
+        
+  - name: params9
+    type: params
+    version:
+      params:
+        versionyml: param9-v1
+        
+  - name: params10
+    type: params
+    version:
+      params:
+        versionyml: param10-v1
         
 #REPLICAS
       
