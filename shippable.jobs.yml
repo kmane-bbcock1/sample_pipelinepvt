@@ -24,10 +24,10 @@ jobs:
       - IN: runci-jav_ciRepo
       - IN: spvt-tg17
   
-  #- name: runci-go_runCI
-   # type: runCI
-  #  steps:
-    #  - IN: runci-go_ciRepo
+  - name: runci-go_runCI
+    type: runCI
+    steps:
+      - IN: runci-go_ciRepo
   
  # - name: runci-php_runCI
    # type: runCI
@@ -231,4 +231,17 @@ jobs:
         - script: ls
         - script: ./IN/scriptpvt_cli2/gitRepo/echo.sh
         - script: echo "versionyml=$versionyml"
+
+  - name: runCLI-7
+    type: runCLI
+    steps:
+      - IN: scriptpvt_test2
+      - IN: param9
+      - IN: runci-go_runCI
+      - IN: spvt-tg17
+      - TASK:
+        - script: ls
+        - script: ./IN/scriptpvt_test2/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"
+        
         
