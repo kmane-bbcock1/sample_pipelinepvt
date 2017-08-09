@@ -160,6 +160,42 @@ resources:
         DB_PASSWORD: "aye0aye"
         ENVIRONMENT: "test-aws"
         
+  - name: params1
+    type: params
+    version:
+      params:
+        versionyml: param1-v1
+        
+  - name: params2
+    type: params
+    version:
+      params:
+        versionyml: param2-v1
+        
+  - name: params3
+    type: params
+    version:
+      params:
+        versionyml: param3-v1
+        
+  - name: params4
+    type: params
+    version:
+      params:
+        versionyml: param4-v1
+  
+  - name: params5
+    type: params
+    version:
+      params:
+        versionyml: param5-v1
+        
+  - name: params6
+    type: params
+    version:
+      params:
+        versionyml: param6-v1
+        
  # - name: ar-paramlinks
  #   type: params
  #   version:
