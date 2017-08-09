@@ -97,7 +97,7 @@ resources:
     type: gitRepo
     integration: "bitbucket"
     pointer:
-      sourceName: "shiphitchcock1/sample_scriptpvt
+      sourceName: "shiphitchcock1/sample_scriptpvt"
       branch: cli1
  
   - name: scriptpvt_cli2
