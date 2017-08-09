@@ -43,4 +43,24 @@ triggers:
      type: trigger
      version:
        counter: 0
+  
+  - name: spvt-tg9
+     type: trigger
+     version:
+       counter: 0
+   
+  - name: spvt-tg10
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg11
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg12
+     type: trigger
+     version:
+       counter: 0
        
