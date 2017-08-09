@@ -210,7 +210,7 @@ jobs:
     type: runCLI
     steps:
       - IN: scriptpub_cli2
-      - IN: params7
+      - IN: param7
       - IN: spvt-tg15
       - TASK:
         - script: ls
@@ -221,7 +221,7 @@ jobs:
     type: runCLI
     steps:
       - IN: scriptpvt_cli2
-      - IN: params-8
+      - IN: param8
       - IN: runci-jav_runCI
       - IN: runCLI-5
       - IN: spvt-tg16
