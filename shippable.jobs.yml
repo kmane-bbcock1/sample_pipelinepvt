@@ -1,0 +1,185 @@
+jobs:
+
+#RELEASE
+#  - name: dryrun-pl_runCI
+  #  type: runCI
+  #  steps:
+   #   - IN: dryrun-pl_ciRepo
+    #flags:
+    #  - dryrun-pl_runCI
+    #  - dryrun-pl_runCInotEnabledFromCIbutAddedInJobsYml
+      
+  - name: spvt-release
+    type: release
+    allowPublicAccess: true
+    steps:
+      - IN: spvt-version
+         #versionName: testrelease
+      - IN: spvt-inrunSh
+      - TASK: managed
+        bump: rc
+       #- IN: ar-tg3
+   
+  - name: spvt-release12
+    type: release
+    steps:
+      - IN: spvt-version
+      - TASK: managed
+        bump: rc
+      
+#MANIFESTS
+      
+  - name: spvt-manifest1
+    type: manifest
+    steps:
+      - IN: spvt-image1
+      # versionNumber: 100
+      - IN: spvt-image2invalidimg
+      #- OUT: ar-image4invalidformat
+      - IN: spvt-tg1
+     allowPublicAccess: true
+       
+  - name: spvt-manifest2
+    type: manifest
+    steps:
+      - IN: spvt-image4invalidformat
+      - IN: spvt-image1
+      - IN: spvt-image2invalidimg
+  
+  - name: ar-manifest3
+    type: manifest
+    steps:
+      - IN: spvt-image1
+      #- IN: tg4 #to make job inconsistent uncomment this
+   # flags:
+     # - ar-manifest3
+  
+  - name: spvt-testDefaultflag_manifest
+    type: manifest
+    steps:
+      - IN: spvt-testDefaultflag_image
+      
+  - name: longnameforjobsinjobsdotshippabledotymlforlongresourcenameasin-spvt-manifest1
+    type: manifest
+    steps:
+      - IN: longnameforresourceinresourcesdotshippabledotyml-ship_dh_cli
+       
+#DEPLOY  
+  - name: spvt-ddcdeploy
+    type: deploy
+    allowPublicAccess: true
+    steps:
+      - IN: spvt-ddccluster
+      - IN: spvt-manifest1
+        switch: off
+      - IN: spvt-params
+      - IN: spvt-dopts
+      - IN: spvt-replica2
+        #versionNumber: 1000      
+    on_start:
+      - NOTIFY: spvt-email
+      - NOTIFY: spvt-slack
+      #- NOTIFY: allpl-irc
+    on_success:
+      - NOTIFY: spvt-email
+      - NOTIFY: spvt-slack
+      #- NOTIFY: allpl-irc
+    on_failure:
+      - NOTIFY: spvt-email
+      - NOTIFY: spvt-slack
+   # flags:
+    #  - ar-ddcdeploy
+      
+#RUNSH      
+  - name: spvt-inrunSh
+    type: runSh
+    allowPublicAccess: false
+    steps:
+      - IN: spvt-samplescript1
+     # versionName: testsha
+      - IN: spvt-image3invalidtag
+     # - IN: ar-paramlinks
+      - IN: spvt-tg2
+      - TASK:
+        - script: ls
+        - script: ./IN/spvt-samplescript1/gitRepo/echo.sh
+        #- script: echo "https://google.com"
+       # - script: echo "$GITHUB"
+       # - script: echo "bitbucket org https://bitbucket.org"
+       # - script: echo "build link $buildLink"
+       # - script: echo $Google
+       # - script: echo "$SHIPPABLE"
+      - OUT: spvt-image2invalidimg
+    on_success:
+      - script: echo 'infra test'
+      - script: echo 'newtesting success'
+    on_failure:
+      - script: echo 'testing1 failure'
+      - script: echo 'failure runSh'
+      - NOTIFY: spvt-slack
+      - NOTIFY: spvt-email
+   # flags:
+   #   - ar-inrunSh
+      
+  - name: spvt-inrunSh2
+    type: runSh
+    steps:
+      - IN: spvt-samplescript1
+      - IN: spvt-tg2
+      - TASK:
+        - script: ls
+        - script: ./IN/spvt-samplescript1/gitRepo/echo.sh
+        - script: echo "https://google.com"
+        - script: echo "bitbucket org https://bitbucket.org"
+      
+#RUNCLI      
+  - name: spvt-inrunCLI
+    type: runCLI
+    allowPublicAccess: false
+    steps:
+      - IN: spvt-samplescript1
+      # versionName: testsha
+      - IN: ship_dh_cli
+      - IN: spvt-testtime
+      - IN: spvt-lb
+      - IN: spvt-files
+       #- IN: ar-image3invalidtag
+      #- IN: test-time-1
+      - TASK:
+        - script: ls
+        - script: ./IN/ar-samplescript1/gitRepo/echo.sh
+        
+  - name: spvt-test1
+    type: release
+    steps:
+      - IN: spvt-version
+         #versionName: testrelease
+     # - IN: ar-inrunSh
+      - TASK: managed
+        bump: rc  
+  
+  - name: spvt-test2
+    type: release
+    steps:
+      - IN: spvt-version
+         #versionName: testrelease
+      - IN: spvt-image3invalidtag
+      - TASK: managed
+        bump: rc
+  #  flags:
+    #  - r1-test2
+        
+#PROVISION
+  - name: spvt-provision                                                  #required
+    type: provision                                                  #required
+    steps:
+      - IN: spvt-files 
+
+#JENKINSJOB
+ # - name: ar-jenkins                  # a memorable, unique name. this is how your job will be referred to in shippable pipelines
+ #   type: jenkinsJob                  # The type of the job (should not be changed by the user)
+ #   integration: "ship-jenkins"   # The name of your Jenkins integration (created via accountSettings page)
+ #   pointer:
+ #     sourceName: "firstjob"          # The name of your Jenkins job
+ #   steps:
+ #     - OUT: "ar-files" 
