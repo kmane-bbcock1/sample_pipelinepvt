@@ -4,6 +4,10 @@ resources:
   - name: docker_cli
     type: cliConfig
     integration: "docker"
+  
+  - name: docker_cli2
+    type: cliConfig
+    integration: "docker"
     
 #CLUSTERS
   
