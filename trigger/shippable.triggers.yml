@@ -58,7 +58,7 @@ triggers:
    - name: spvt-tg12
      type: trigger
      version:
-       counter: 2
+       counter: 3
        
    - name: spvt-tg13
      type: trigger
