@@ -1,185 +1,187 @@
 jobs:
 
-#RELEASE
-#  - name: dryrun-pl_runCI
-  #  type: runCI
-  #  steps:
-   #   - IN: dryrun-pl_ciRepo
-    #flags:
-    #  - dryrun-pl_runCI
-    #  - dryrun-pl_runCInotEnabledFromCIbutAddedInJobsYml
+  - name: sample_scriptpub_runCI
+    type: runCI
+    steps:
+      - IN: sample_scriptpub_ciRepo
+  
+  - name: sample_scriptpvt_runCI
+    type: runCI
+    steps:
+      - IN: sample_scriptpvt_ciRepo
+  
+  - name: runci-nod_runCI
+    type: runCI
+    steps:
+      - IN: runci-nod_ciRepo
+  
+  - name: runci-jav_runCI
+    type: runCI
+    steps:
+      - IN: runci-jav_ciRepo
+  
+  - name: runci-go_runCI
+    type: runCI
+    steps:
+      - IN: runci-go_ciRepo
+  
+  - name: runci-php_runCI
+    type: runCI
+    steps:
+      - IN: runci-php_ciRepo
+  
+  - name: runci-php_runCI
+    type: runCI
+    steps:
+      - IN: runci-php_ciRepo
+  
+  - name: runci-clo_runCI
+    type: runCI
+    steps:
+      - IN: runci-clo_ciRepo
       
-  - name: spvt-release
+  - name: release1
     type: release
     allowPublicAccess: true
     steps:
-      - IN: spvt-version
-         #versionName: testrelease
-      - IN: spvt-inrunSh
+      - IN: version-rc
       - TASK: managed
         bump: rc
-       #- IN: ar-tg3
    
-  - name: spvt-release12
+  - name: release2
     type: release
     steps:
-      - IN: spvt-version
+      - IN: release1
       - TASK: managed
-        bump: rc
+        bump: major
       
 #MANIFESTS
       
-  - name: spvt-manifest1
+  - name: manifest-1bb
     type: manifest
     steps:
-      - IN: spvt-image1
+      - IN: image1
       # versionNumber: 100
-      - IN: spvt-image2invalidimg
-      #- OUT: ar-image4invalidformat
       - IN: spvt-tg1
-     allowPublicAccess: true
        
-  - name: spvt-manifest2
+  - name: manifest-2bb
     type: manifest
     steps:
-      - IN: spvt-image4invalidformat
-      - IN: spvt-image1
-      - IN: spvt-image2invalidimg
+      - IN: image2
+      - IN: spvt-tg2
   
-  - name: ar-manifest3
+  - name: manifest-3bb
     type: manifest
     steps:
-      - IN: spvt-image1
-      #- IN: tg4 #to make job inconsistent uncomment this
-   # flags:
-     # - ar-manifest3
-  
-  - name: spvt-testDefaultflag_manifest
-    type: manifest
-    steps:
-      - IN: spvt-testDefaultflag_image
-      
-  - name: longnameforjobsinjobsdotshippabledotymlforlongresourcenameasin-spvt-manifest1
-    type: manifest
-    steps:
-      - IN: longnameforresourceinresourcesdotshippabledotyml-ship_dh_cli
+      - IN: image3
+      - IN: manifest-1bb
+      - IN: manifest-2bb
+      - IN: spvt-tg3
        
 #DEPLOY  
-  - name: spvt-ddcdeploy
+  - name: ddcdeploy-1bb
     type: deploy
-    allowPublicAccess: true
     steps:
-      - IN: spvt-ddccluster
-      - IN: spvt-manifest1
-        switch: off
-      - IN: spvt-params
-      - IN: spvt-dopts
+      - IN: ddccluster
+      - IN: manifest-1bb
       - IN: spvt-replica2
-        #versionNumber: 1000      
-    on_start:
-      - NOTIFY: spvt-email
-      - NOTIFY: spvt-slack
-      #- NOTIFY: allpl-irc
-    on_success:
-      - NOTIFY: spvt-email
-      - NOTIFY: spvt-slack
-      #- NOTIFY: allpl-irc
-    on_failure:
-      - NOTIFY: spvt-email
-      - NOTIFY: spvt-slack
-   # flags:
-    #  - ar-ddcdeploy
+      - IN: spvt-tg4
+      
+  - name: ddcdeploy-2bb
+    type: deploy
+    steps:
+      - IN: ddccluster
+      - IN: manifest-3bb       
+      - IN: spvt-tg5
       
 #RUNSH      
-  - name: spvt-inrunSh
+  - name: runSh-1
     type: runSh
-    allowPublicAccess: false
     steps:
-      - IN: spvt-samplescript1
+      - IN: scriptpvt_master
      # versionName: testsha
-      - IN: spvt-image3invalidtag
-     # - IN: ar-paramlinks
-      - IN: spvt-tg2
+      - IN: param1
+      - IN: spvt-tg6
       - TASK:
         - script: ls
-        - script: ./IN/spvt-samplescript1/gitRepo/echo.sh
-        #- script: echo "https://google.com"
-       # - script: echo "$GITHUB"
-       # - script: echo "bitbucket org https://bitbucket.org"
-       # - script: echo "build link $buildLink"
-       # - script: echo $Google
-       # - script: echo "$SHIPPABLE"
-      - OUT: spvt-image2invalidimg
-    on_success:
-      - script: echo 'infra test'
-      - script: echo 'newtesting success'
-    on_failure:
-      - script: echo 'testing1 failure'
-      - script: echo 'failure runSh'
-      - NOTIFY: spvt-slack
-      - NOTIFY: spvt-email
-   # flags:
-   #   - ar-inrunSh
+        - script: ./IN/scriptpvt_master/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"
       
-  - name: spvt-inrunSh2
+  - name: runSh-2
     type: runSh
     steps:
-      - IN: spvt-samplescript1
-      - IN: spvt-tg2
+      - IN: scriptpvt_cli1
+      - IN: param2
+      - IN: spvt-tg7
       - TASK:
         - script: ls
-        - script: ./IN/spvt-samplescript1/gitRepo/echo.sh
-        - script: echo "https://google.com"
-        - script: echo "bitbucket org https://bitbucket.org"
-      
-#RUNCLI      
-  - name: spvt-inrunCLI
-    type: runCLI
-    allowPublicAccess: false
-    steps:
-      - IN: spvt-samplescript1
-      # versionName: testsha
-      - IN: ship_dh_cli
-      - IN: spvt-testtime
-      - IN: spvt-lb
-      - IN: spvt-files
-       #- IN: ar-image3invalidtag
-      #- IN: test-time-1
-      - TASK:
-        - script: ls
-        - script: ./IN/ar-samplescript1/gitRepo/echo.sh
-        
-  - name: spvt-test1
-    type: release
-    steps:
-      - IN: spvt-version
-         #versionName: testrelease
-     # - IN: ar-inrunSh
-      - TASK: managed
-        bump: rc  
+        - script: ./IN/scriptpvt_cli1/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"
   
-  - name: spvt-test2
-    type: release
+  - name: runSh-3
+    type: runSh
     steps:
-      - IN: spvt-version
-         #versionName: testrelease
-      - IN: spvt-image3invalidtag
-      - TASK: managed
-        bump: rc
-  #  flags:
-    #  - r1-test2
+      - IN: runSh-1
+      - IN: runSh-2
+      - IN: param3
+      - IN: spvt-tg8
+      - TASK:
+        - script: ls
+        - script: echo "versionyml=$versionyml"
+        - script: echo "EOF!"
         
-#PROVISION
-  - name: spvt-provision                                                  #required
-    type: provision                                                  #required
+  - name: runSh-4
+    type: runSh
     steps:
-      - IN: spvt-files 
-
-#JENKINSJOB
- # - name: ar-jenkins                  # a memorable, unique name. this is how your job will be referred to in shippable pipelines
- #   type: jenkinsJob                  # The type of the job (should not be changed by the user)
- #   integration: "ship-jenkins"   # The name of your Jenkins integration (created via accountSettings page)
- #   pointer:
- #     sourceName: "firstjob"          # The name of your Jenkins job
- #   steps:
- #     - OUT: "ar-files" 
+      - IN: scriptpvt_test
+      - IN: runSh-3
+      - IN: spvt-tg9
+      - TASK:
+        - script: ./IN/scriptpvt_test/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"
+           
+#RUNSH      
+  - name: runCLI-1
+    type: runCLI
+    steps:
+      - IN: scriptpub_master
+     # versionName: testsha
+      - IN: param4
+      - IN: spvt-tg10
+      - TASK:
+        - script: ls
+        - script: ./IN/scriptpub_master/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"
+      
+  - name: runCLI-2
+    type: runCLI
+    steps:
+      - IN: scriptpub_cli1
+      - IN: param5
+      - IN: spvt-tg11
+      - TASK:
+        - script: ls
+        - script: ./IN/scriptpub_cli1/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"
+  
+  - name: runCLI-3
+    type: runCLI
+    steps:
+      - IN: runCLI-1
+      - IN: runCLI-2
+      - IN: param6
+      - IN: spvt-tg12
+      - TASK:
+        - script: ls
+        - script: echo "versionyml=$versionyml"
+        - script: echo "EOF!"
+        
+  - name: runCLI-4
+    type: runCLI
+    steps:
+      - IN: scriptpub_test
+      - IN: runCLI-3
+      - IN: spvt-tg13
+      - TASK:
+        - script: ./IN/scriptpub_test/gitRepo/echo.sh
+        - script: echo "versionyml=$versionyml"  
