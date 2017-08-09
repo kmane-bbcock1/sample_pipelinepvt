@@ -23,7 +23,7 @@ resources:
 
 #GITREPO:
 
-  - name: script-pvt
+  - name: scriptpvt_master
     type: gitRepo
     integration: "bitbucket"
     pointer:
@@ -37,12 +37,33 @@ resources:
       buildOnRelease: true
       buildOnTagPush: true
       
-  - name: script-pub
+  - name: scriptpub_master
     type: gitRepo
     integration: "bitbucket"
     pointer:
       sourceName: "shiphitchcock1/sample_scriptpub"
       branch: master
+
+  - name: scriptpvt_test
+    type: gitRepo
+    integration: "bitbucket"
+    pointer:
+      sourceName: "shiphitchcock1/sample_scriptpvt"
+      branch: test
+      #tags:
+       # only:
+        #  - v1.*
+      buildOnCommit: true    
+      buildOnPullRequest: true
+      buildOnRelease: true
+      buildOnTagPush: true
+      
+  - name: scriptpub_test
+    type: gitRepo
+    integration: "bitbucket"
+    pointer:
+      sourceName: "shiphitchcock1/sample_scriptpub"
+      branch: test
       
 #IMAGES
   - name: image1
