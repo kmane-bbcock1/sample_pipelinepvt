@@ -29,7 +29,7 @@ triggers:
      version:
        counter: 0
        
-  - name: spvt-tg7
+   - name: spvt-tg7
      type: trigger
      version:
        counter: 0
