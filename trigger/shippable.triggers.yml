@@ -64,3 +64,48 @@ triggers:
      version:
        counter: 0
        
+   - name: spvt-tg13
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg14
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg15
+     type: trigger
+     version:
+       counter: 0
+       
+  - name: spvt-tg16
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg17
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg18
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg19
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg20
+     type: trigger
+     version:
+       counter: 0
+       
+   - name: spvt-tg21
+     type: trigger
+     version:
+       counter: 0
+       
