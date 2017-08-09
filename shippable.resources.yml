@@ -78,6 +78,13 @@ resources:
     pointer:
       sourceName: "shiphitchcock1/sample_scriptpvt"
       branch: test1
+  
+  - name: scriptpvt_test2
+    type: gitRepo
+    integration: "bitbucket"
+    pointer:
+      sourceName: "shiphitchcock1/sample_scriptpvt"
+      branch: test2
       
   - name: scriptpub_cli1
     type: gitRepo
