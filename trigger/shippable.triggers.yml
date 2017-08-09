@@ -79,7 +79,7 @@ triggers:
      version:
        counter: 0
        
-  - name: spvt-tg16
+   - name: spvt-tg16
      type: trigger
      version:
        counter: 0
